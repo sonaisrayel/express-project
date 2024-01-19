@@ -1,7 +1,7 @@
 
 
 export const getUsers = async () => {
- return  fetch('https://jsonplaceholder.typicode.com/users/2')
+ return  fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
 }
 
