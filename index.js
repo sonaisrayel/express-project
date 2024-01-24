@@ -1,27 +1,19 @@
-
 import express from 'express';
-import fs from 'fs';
-
-import userRouter from './users-router.js'
-import { filterAdmins, experience } from './middleware.js'
-
-
 const app = express();
 
+import userRouter from './Router/users-router.js'
+import todoRouter from './Router/todo-router.js'
+// import authRouter from './auth-router.js';
+
+// import * as middleware from './middlewares'
+
 app.use(express.json());
-app.use(filterAdmins);
-
-app.use(userRouter);
-
-const users = JSON.parse(fs.readFileSync('users.json', 'utf-8'))
+// app.use('/auth', authRouter);
+app.use('/users', userRouter);
+app.use('/todos', todoRouter);
 
 
-app.post('/:id', experience, (req, res) => {
-    const { id, experience } = req.body;
-    res.status(201).send(`id:${id}, experience: ${experience}`)
-})
-
-app.listen(3001, () => {
+app.listen(3000, () => {
     console.log(`Server started at port 3000`)
 })
 
